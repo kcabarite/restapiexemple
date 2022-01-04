@@ -5,9 +5,7 @@
     <classes>
       <class name="testes.TesteApiDummy">
         <methods>
-          <include name="test5_deleteEmployee"/>
-          <include name="test2_postEmployee"/>
-          <include name="test4_putEmployee"/>
+          <include name="test3_getIDEmployee"/>
         </methods>
       </class> <!-- testes.TesteApiDummy -->
     </classes>

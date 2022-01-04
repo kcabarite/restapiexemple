@@ -1,25 +1,27 @@
 package testes;
 
-import org.testng.annotations.Test;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
+import org.testng.annotations.Test;
+
 //import org.junit.Test;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.minidev.json.JSONObject;
-import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TesteApiDummy {
 
 
 		@Test()
-		public void test1_getAllEmployee() {
+		public void test1_getAllEmployee() throws Exception {
 		
 			RestAssured.baseURI ="https://dummy.restapiexample.com/api/v1";
 			RequestSpecification request = RestAssured.given();
-		
+			
+			Thread.sleep(60000);
 			JSONObject requestParams = new JSONObject();	
 			request.body(requestParams.toJSONString());
 			Response response = request.get("/employees");
@@ -33,16 +35,19 @@ public class TesteApiDummy {
 		}
 		
 		@Test
-		public void test2_postEmployee() {
+		public void test2_postEmployee() throws Exception {
 			
 			RestAssured.baseURI ="https://dummy.restapiexample.com/api/v1";
 			RequestSpecification request = RestAssured.given();
 
 			JSONObject requestParams = new JSONObject();
 			
-			requestParams.put("name", "Kleber");
-			requestParams.put("salary", "9000");
-			requestParams.put("age", "39");
+			Thread.sleep(60000);
+			
+			requestParams.put("employee_name", "Jose");
+			requestParams.put("employee_salary", "31222");
+			requestParams.put("employee_age", "38");
+			requestParams.put("profile_image", "");
 
 			request.body(requestParams.toJSONString());
 			Response response = request.post("/create");
@@ -56,13 +61,14 @@ public class TesteApiDummy {
 		}
 		
 		@Test()
-		public void test3_getIDEmployee() {
+		public void test3_getIDEmployee() throws Exception {
 		
-			int id = 719;	
+			int id = 1;	
 			
 			RestAssured.baseURI ="https://dummy.restapiexample.com/api/v1";
 			RequestSpecification request = RestAssured.given();
 		
+			Thread.sleep(60000);
 			JSONObject requestParams = new JSONObject();	
 			request.body(requestParams.toJSONString());
 			Response response = request.get("/employee/" + id);
@@ -77,18 +83,19 @@ public class TesteApiDummy {
 		}
 				
 		@Test()
-		public void test4_putEmployee() {
+		public void test4_putEmployee() throws Exception {
 			
-			int id = 21;
+			int id = 100;
 
 			RestAssured.baseURI ="https://dummy.restapiexample.com/api/v1";
 			RequestSpecification request = RestAssured.given();
 			
+			Thread.sleep(60000);
 			JSONObject requestParams = new JSONObject();
-			requestParams.put("name", "Jose");
-			requestParams.put("age", "25");
-			requestParams.put("salary", "8000");
-
+			requestParams.put("employee_name", "Kleber");
+			requestParams.put("employee_salary", "3133");
+			requestParams.put("employee_age", "32");
+			
 			request.body(requestParams.toJSONString());
 			Response response = request.put("/update/"+ id);
 		
@@ -96,14 +103,16 @@ public class TesteApiDummy {
 			Assert.assertEquals(statusCode, 200); 			
 			
 			String jsonString = response.asString();
+			System.out.println(jsonString);
 		    Assert.assertEquals(jsonString.contains("Successfully! Record has been updated."), true);
 		}
 			
 			@Test()
-			public void test5_deleteEmployee() {
+			public void test5_deleteEmployee() throws Exception {
 			
-			int id = 719;
-				
+			int id = 3;
+			
+			Thread.sleep(60000);	
 			RestAssured.baseURI = "https://dummy.restapiexample.com/api/v1";
 			RequestSpecification request = RestAssured.given();	
 				
